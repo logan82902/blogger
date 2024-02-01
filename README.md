@@ -1,2 +1,2 @@
 # blogger
-My blogger app...
+My blogger app.
