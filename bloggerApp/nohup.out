@@ -1,0 +1,25 @@
+
+> bloggerapp@0.0.0 start
+> node ./bin/www
+
+[0mGET / [36m304 [0m10.972 ms - -[0m
+[0mGET /css/bootstrap.min.css [36m304 [0m1.720 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.408 ms - -[0m
+[0mGET /blogList [36m304 [0m2.436 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.863 ms - -[0m
+[0mGET /css/bootstrap.min.css [36m304 [0m1.081 ms - -[0m
+[0mGET /blogAdd [36m304 [0m2.730 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.954 ms - -[0m
+[0mGET /css/bootstrap.min.css [36m304 [0m1.316 ms - -[0m
+[0mGET /blogList [36m304 [0m1.231 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m1.641 ms - -[0m
+[0mGET /css/bootstrap.min.css [36m304 [0m1.160 ms - -[0m
+[0mGET /blogAdd [36m304 [0m1.235 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.936 ms - -[0m
+[0mGET /css/bootstrap.min.css [36m304 [0m1.198 ms - -[0m
+[0mGET / [36m304 [0m1.271 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m1.012 ms - -[0m
+[0mGET /css/bootstrap.min.css [36m304 [0m1.189 ms - -[0m
+[0mGET / [36m304 [0m1.075 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m1.893 ms - -[0m
+[0mGET /css/bootstrap.min.css [36m304 [0m1.908 ms - -[0m
