@@ -2,24 +2,36 @@
 > bloggerapp@0.0.0 start
 > node ./bin/www
 
-[0mGET / [36m304 [0m10.972 ms - -[0m
-[0mGET /css/bootstrap.min.css [36m304 [0m1.720 ms - -[0m
-[0mGET /stylesheets/style.css [36m304 [0m0.408 ms - -[0m
-[0mGET /blogList [36m304 [0m2.436 ms - -[0m
-[0mGET /stylesheets/style.css [36m304 [0m0.863 ms - -[0m
-[0mGET /css/bootstrap.min.css [36m304 [0m1.081 ms - -[0m
-[0mGET /blogAdd [36m304 [0m2.730 ms - -[0m
-[0mGET /stylesheets/style.css [36m304 [0m0.954 ms - -[0m
-[0mGET /css/bootstrap.min.css [36m304 [0m1.316 ms - -[0m
-[0mGET /blogList [36m304 [0m1.231 ms - -[0m
-[0mGET /stylesheets/style.css [36m304 [0m1.641 ms - -[0m
-[0mGET /css/bootstrap.min.css [36m304 [0m1.160 ms - -[0m
-[0mGET /blogAdd [36m304 [0m1.235 ms - -[0m
-[0mGET /stylesheets/style.css [36m304 [0m0.936 ms - -[0m
-[0mGET /css/bootstrap.min.css [36m304 [0m1.198 ms - -[0m
-[0mGET / [36m304 [0m1.271 ms - -[0m
-[0mGET /stylesheets/style.css [36m304 [0m1.012 ms - -[0m
-[0mGET /css/bootstrap.min.css [36m304 [0m1.189 ms - -[0m
-[0mGET / [36m304 [0m1.075 ms - -[0m
-[0mGET /stylesheets/style.css [36m304 [0m1.893 ms - -[0m
-[0mGET /css/bootstrap.min.css [36m304 [0m1.908 ms - -[0m
+Mongoose connected to mongodb://blogs:blogger@localhost:27017/blogs
+[0mGET /blogList [36m304 [0m16.161 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m2.672 ms - -[0m
+[0mGET /css/bootstrap.min.css [36m304 [0m3.676 ms - -[0m
+[0mGET /stylesheets/fontawesome-all.css [36m304 [0m3.776 ms - -[0m
+[0mGET /blogList [36m304 [0m1.839 ms - -[0m
+[0mGET /stylesheets/fontawesome-all.css [36m304 [0m0.878 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.959 ms - -[0m
+[0mGET /css/bootstrap.min.css [36m304 [0m2.227 ms - -[0m
+[0mGET /blogAdd [36m304 [0m2.632 ms - -[0m
+[0mGET /stylesheets/fontawesome-all.css [36m304 [0m0.937 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m1.098 ms - -[0m
+[0mGET /css/bootstrap.min.css [36m304 [0m2.405 ms - -[0m
+[0mGET / [36m304 [0m1.940 ms - -[0m
+[0mGET /stylesheets/fontawesome-all.css [36m304 [0m0.765 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m1.227 ms - -[0m
+[0mGET /css/bootstrap.min.css [36m304 [0m2.758 ms - -[0m
+[0mGET /blogList [36m304 [0m1.216 ms - -[0m
+[0mGET /stylesheets/fontawesome-all.css [36m304 [0m0.844 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m1.007 ms - -[0m
+[0mGET /css/bootstrap.min.css [36m304 [0m2.387 ms - -[0m
+[0mGET /blogList [36m304 [0m1.245 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.668 ms - -[0m
+[0mGET /css/bootstrap.min.css [36m304 [0m0.863 ms - -[0m
+[0mGET /stylesheets/fontawesome-all.css [36m304 [0m0.319 ms - -[0m
+[0mGET /blogList [36m304 [0m1.023 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.627 ms - -[0m
+[0mGET /css/bootstrap.min.css [36m304 [0m0.928 ms - -[0m
+[0mGET /stylesheets/fontawesome-all.css [36m304 [0m0.890 ms - -[0m
+[0mGET /blogList [36m304 [0m1.121 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.639 ms - -[0m
+[0mGET /stylesheets/fontawesome-all.css [36m304 [0m0.759 ms - -[0m
+[0mGET /css/bootstrap.min.css [36m304 [0m2.098 ms - -[0m
