@@ -3,9 +3,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-require('./app_server/models/db');
+require('./app_api/models/db');
 
 var indexRouter = require('./app_server/routes/index');
+var routesApi = require('./app_api/routes/index');
 
 var app = express();
 
@@ -23,6 +24,7 @@ app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css')); 
 
 app.use('/', indexRouter);
+app.use('/api', routesApi);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
