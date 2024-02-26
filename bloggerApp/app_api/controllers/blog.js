@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Blogs = mongoose.model('Blog');
 
-var sendJsonResponse = function(res, status, content) {
+var sendJSONresponse = function(res, status, content) {
     res.status(status);
     res.json(content);
 };
@@ -64,34 +64,53 @@ module.exports.blogCreateOne = function (req, res) {
 };
    
 module.exports.blogUpdateOne = function (req, res) {
-    console.log("Updating a blog entry with id of " + req.params.blogid);
-    console.log(req.body);
-    Blogs
-  	  .findOneAndUpdate(
-	     { _id: req.params.id },
- 	     { $set: {"blogTitle": req.body.blogTitle, "blogEntry": req.body.blogEntry}},
-	     function(err, response) {
-	         if (err) {
-	  	         sendJSONresponse(res, 400, err);
-	         } else {
-		        sendJSONresponse(res, 201, response);
-	        }
-	    }
-    );
+  if (!req.params.blogid) {
+    sendJSONresponse(res, 404, {"message": "Not found, blogid is required"});
+    return;
+  }
+
+  Blogs
+    .findById(req.params.blogid)
+    .exec(function (err, blog) {
+        if (!blog) {
+            sendJSONresponse(res, 404, {"message": "blogid not found"});
+            return;
+        } else if (err) {
+            sendJSONresponse(res, 400, err);
+            return;
+        }
+        blog.title = req.body.title || blog.title;
+        blog.text = req.body.text || blog.text;
+        blog.createdOn = req.body.createdOn || blog.createdOn || new Date();
+        blog.save(function (err, blog) {
+            if (err) {
+                sendJSONresponse(res, 400, err);
+            } else {
+                sendJSONresponse(res, 200, blog);
+            }
+        });
+    });
 };
 
 module.exports.blogDeleteOne = function (req, res) {
-    console.log("Deleting blog entry with id of " + req.params.blogid);
-    console.log(req.body);
+  var blogid = req.params.blogid;
+  if (blogid) {
     Blogs
-        .findByIdAndRemove(req.params.blogid)
-        .exec (
-            function(err, response) {
-                if (err) {
-                    sendJSONresponse(res, 404, err);
-                } else {
-                    sendJSONresponse(res, 204, response);
-                }
-            }
-        );
+      .findByIdAndRemove(req.params.blogid)
+      .exec(
+        function(err, blog) {
+          if (err) {
+            console.log(err);
+            sendJSONresponse(res, 404, err);
+            return;
+          }
+          console.log("Blog id " + req.params.blogid + " deleted");
+          sendJSONresponse(res, 204, blog);
+        }
+    );
+  } else {
+    sendJSONresponse(res, 404, {
+      "message": "No blogid"
+    });
+  }
 };
