@@ -3,10 +3,24 @@
   <head>
     <%- include('./partials/navbar') %>
     <%- include('./partials/layout') %>
-    <title>Blog Edit</title>
   </head>
   <body>
-    <h1>Blog Edit</h1>
-    <p>**UNDER CONSTRUCTION**</p>
+    <div class="container">
+      <p></p>
+      <div class="card border-primary" style="width: 50%">
+        <form action="/blogEdit/<%= blog._id %>" method="post" style="padding: 20px; font-size: 18px">
+          <div class="form-group">
+            <label for="summary" class="text-primary">Blog Title</label>
+            <input class="form-control" id="title" name="title" value="<%=blog.title%>">
+            <p></p>
+            <label for="text" class="text-primary">Blog Text</label>
+            <textarea class="form-control" id="text" rows="3" name="text"><%=blog.text%></textarea>
+            <p></p>
+          </div>
+    
+          <input type="submit" class="btn btn-primary" value="Update Blog">
+        </form>
+      </div>
+      </div>
   </body>
 </html>
