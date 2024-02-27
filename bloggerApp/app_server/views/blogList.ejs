@@ -3,6 +3,8 @@
   <head>
     <%- include('./partials/navbar') %>
     <%- include('./partials/layout') %>
+    <script src="/javascripts/jquery-1.11.1.min.js"></script> 
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
   </head>
   <body>
     <p>
@@ -13,20 +15,20 @@
             </div>
           </div>
           <div class="card-body">
-            <h5 class="card-title"><%= blog.title %></h5>
-            <p class="card-text"><%= blog.text %></p>
+            <h5 class="card-title"><%= blog.blogTitle %></h5>
+            <p class="card-text"><%= blog.blogEntry %></p>
           </div>
           <div class="card-footer">
             <div class="row">
               <div class="col-sm">
                 <ul class="nav justify-content-end nav-pills card-header-pills">
                   <li class="nav-item">
-                    <a class="nav-link" href="/blogEdit">
+                    <a class="nav-link" href="/blogEdit/<%= blog._id %>">
                       <i class="fas fa-edit"></i>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="/blogDelete">
+                    <a class="nav-link" href="/blogDelete/<%= blog._id %>">
                       <i class="fas fa-trash-alt"></i>
                     </a>
                   </li>

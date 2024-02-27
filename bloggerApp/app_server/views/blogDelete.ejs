@@ -6,7 +6,22 @@
     <title>Blog Delete</title>
   </head>
   <body>
-    <h1>Blog Delete</h1>
-    <p>**UNDER CONSTRUCTION**</p>
+    <div class="container">
+      <p></p>
+      <div class="card border-primary" style="width: 50%">
+        <form action="/blogDelete/<%= blog._id %>" method="post" style="padding: 20px">
+          <div class="form-group">
+            <label for="summary" class="text-primary">Blog Title</label>
+            <input readonly class="form-control" id="title" name="title">
+            <p></p>
+            <label for="text" class="text-primary">Blog Text</label>
+            <textarea readonly class="form-control" id="text" rows="3" name="text"></textarea>
+            <p></p>
+          </div>
+    
+          <input type="submit" class="btn btn-primary" value="Delete Blog">
+        </form>
+      </div>
+      </div>
   </body>
 </html>
