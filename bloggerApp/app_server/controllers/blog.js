@@ -78,7 +78,7 @@ module.exports.blogEdit = function(req, res){
 };
 
 var renderBlogDeletion = function(req, res) {
-  res.render('blogDelete', { title: "Blog Deletion", blogid: blogid});
+  res.render('blogDelete', { title: "Blog Deletion", blogid: req.params.blogid});
 };
 
 // GET 'blogDelete' page
