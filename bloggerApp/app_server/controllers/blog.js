@@ -1,7 +1,7 @@
 // app_server-controllers/blog.js
 var request = require('request');
 var apiOptions = {
-    server : "http://54.173.57.226/"
+    server : "http://54.173.57.226"
   };
 
 var renderBloglist = function(req, res, responseBody) {
@@ -20,12 +20,13 @@ module.exports.blogList = function (req, res) {
   request(
       requestOptions,
       function(err, response, body) {
+        renderBloglist(req, res, body);
         if (err) {
           console.error("Error in API request:", err);
           res.status(500).render('error', { error: "Internal Server Error" });
           return;
         }
-          renderBloglist(req, res, body);
+        
       }
   );
 };
@@ -58,6 +59,8 @@ var renderBlogEdit = function(req, res, responseBody){
   res.render('blogEdit', { title: 'Blog Edit', blog: responseBody });
 };
 
+
+// GET 'blogEdit' page
 module.exports.blogEdit = function(req, res){
   var requestOptions, path;
   path = "/api/blogs/" + req.params.blogid;
@@ -74,22 +77,22 @@ module.exports.blogEdit = function(req, res){
   );
 };
 
+var renderBlogDeletion = function(req, res) {
+  res.render('blogDelete', { title: "Blog Deletion", blogid: blogid});
+};
+
+// GET 'blogDelete' page
 module.exports.blogDelete = function (req, res) {
+  renderBlogDeletion(req, res);
+
   var requestOptions, path;
-  path = "/api/blogs/" + req.params.id; 
+  path = "/api/blogs/" + req.params.blogid;
   requestOptions = {
       url: apiOptions.server + path,
       method: "DELETE",
       json: {}
   };
   request(
-      requestOptions,
-      function (err, response, body) {
-          if (response.statusCode === 204) {
-              res.redirect('/blogList');
-          } else {
-              res.status(response.statusCode).send(body);
-          }
-      }
+      requestOptions
   );
-    };
+};
