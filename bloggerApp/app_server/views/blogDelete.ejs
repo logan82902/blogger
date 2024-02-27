@@ -3,19 +3,18 @@
   <head>
     <%- include('./partials/navbar') %>
     <%- include('./partials/layout') %>
-    <title>Blog Delete</title>
   </head>
   <body>
     <div class="container">
       <p></p>
       <div class="card border-primary" style="width: 50%">
-        <form action="/blogDelete/<%= blogid %>" method="post" style="padding: 20px; font-size: 18px">
+        <form action="/blogDelete/<%=blog._id%>" method="post" style="padding: 20px; font-size: 18px">
           <div class="form-group">
             <label for="summary" class="text-primary">Blog Title</label>
-            <input readonly class="form-control" id="title" name="title" value="<% title %>">
+            <input readonly class="form-control" id="title" name="title" value="<%=blog.title%>">
             <p></p>
             <label for="text" class="text-primary">Blog Text</label>
-            <textarea readonly class="form-control" id="text" rows="3" name="text" value="<% text %>"></textarea>
+            <textarea readonly class="form-control" id="text" rows="3" name="text"><%=blog.text%></textarea>
             <p></p>
           </div>
     

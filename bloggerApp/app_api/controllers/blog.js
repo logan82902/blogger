@@ -92,7 +92,7 @@ module.exports.blogUpdateOne = function (req, res) {
       return blog.save();
     })
     .then(updatedBlog => {
-      sendJSONresponse(res, 200, updatedBlog);
+      sendJSONresponse(res, 201, updatedBlog);
     })
     .catch(err => {
       sendJSONresponse(res, 400, err);
