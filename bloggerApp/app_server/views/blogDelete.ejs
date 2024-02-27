@@ -9,17 +9,18 @@
     <div class="container">
       <p></p>
       <div class="card border-primary" style="width: 50%">
-        <form action="/blogDelete/<%= blog._id %>" method="post" style="padding: 20px">
+        <form action="/blogDelete/<%= blogid %>" method="post" style="padding: 20px; font-size: 18px">
           <div class="form-group">
             <label for="summary" class="text-primary">Blog Title</label>
-            <input readonly class="form-control" id="title" name="title">
+            <input readonly class="form-control" id="title" name="title" value="<% title %>">
             <p></p>
             <label for="text" class="text-primary">Blog Text</label>
-            <textarea readonly class="form-control" id="text" rows="3" name="text"></textarea>
+            <textarea readonly class="form-control" id="text" rows="3" name="text" value="<% text %>"></textarea>
             <p></p>
           </div>
     
-          <input type="submit" class="btn btn-primary" value="Delete Blog">
+          <input type="submit" class="btn btn-danger float-right" value="Delete Blog">
+          <a class="btn btn-primary float-right" style="margin-right: 25px" href="/blogList" role="button">Cancel</a>
         </form>
       </div>
       </div>

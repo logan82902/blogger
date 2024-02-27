@@ -8,13 +8,21 @@ var sendJSONresponse = function(res, status, content) {
 
 module.exports.blogReadList = function (req, res) {
   Blogs
-    .find({}, function(err, blogs) {
-      if (err) {
+    .find()
+    .exec()
+    .then(results => {
+        if (!results || results.length === 0) {
+            sendJSONresponse(res, 404, {
+                "message": "No blogs found"
+            });
+        } else {
+            console.log(results);
+            sendJSONresponse(res, 200, createBlogList(req, res, results));
+        }
+    })
+    .catch(err => {
         console.log(err);
         sendJSONresponse(res, 500, err);
-        return;
-      }
-      sendJSONresponse(res, 200, blogs);
     });
 };
 
@@ -110,4 +118,17 @@ module.exports.blogDeleteOne = function (req, res) {
       "message": "No blogid"
     });
   }
+};
+
+var createBlogList = function(req, res, results) {
+  var blogs = [];
+  results.forEach(function(obj) {
+    blogs.push({
+      title: obj.title,
+      text: obj.text,
+      createdOn: obj.createdOn,
+      _id: obj._id
+    });
+  });
+  return blogs;
 };
