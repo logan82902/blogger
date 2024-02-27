@@ -12,7 +12,7 @@ const blogSchema = new mongoose.Schema({
     createdOn: {
       type: Date,
       default: Date.now,
-    },
+    }
 });
 
 mongoose.model('Blog', blogSchema);

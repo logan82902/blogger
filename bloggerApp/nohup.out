@@ -1,0 +1,9 @@
+
+> bloggerapp@0.0.0 start
+> node ./bin/www
+
+[0mGET / [36m304 [0m348.566 ms - -[0m
+[0mGET /css/bootstrap.min.css [36m304 [0m4.267 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.464 ms - -[0m
+[0mGET /stylesheets/fontawesome-all.css [36m304 [0m0.556 ms - -[0m
+Mongoose connected to mongodb://blogs:blogger@localhost:27017/blogs
