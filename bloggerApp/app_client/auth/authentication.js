@@ -1,6 +1,5 @@
 var app = angular.module('bloggerApp');
 
-//*** Authentication Service and Methods **
 app.service('authentication', authentication);
     authentication.$inject = ['$window', '$http'];
     function authentication ($window, $http) {

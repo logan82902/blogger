@@ -24,15 +24,16 @@ module.exports.register = function(req, res) {
 
   user.save() 
     .then(() => {
-      var token = user.generateJwt();
-      sendJSONresponse(res, 200, {
-        "token": token
-      });
+      // Log in the user after registration
+      req.body.email = req.body.email; 
+      req.body.password = req.body.password;
+      module.exports.login(req, res); 
     })
     .catch(err => {
       sendJSONresponse(res, 404, err);
     });
 };
+
 
 module.exports.login = function(req, res) {
   console.log("Login request received:", req.body.email); 
