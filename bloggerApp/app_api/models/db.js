@@ -3,7 +3,7 @@ require('./blog');
 require('./users');
 
 var gracefulShutdown;
-var dbURI = 'mongodb://blogs:blogger@localhost:27017/blogs';
+var dbURI = 'mongodb://blogs:blog123@localhost:27017/blogs';
 
 mongoose.connect(dbURI);
 
