@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Blogs = mongoose.model('Blog');
+const authMiddleware = require('./authMiddleware');
 
 var sendJSONresponse = function(res, status, content) {
     res.status(status);
@@ -55,6 +56,9 @@ module.exports.blogReadOne = function (req, res) {
 };
 
 module.exports.blogCreateOne = function (req, res) {
+  if (!req.user) {
+    return res.status(401).json({ message: 'Unauthorized' });
+  }
   console.log(req.body);
   Blogs
    .create({
@@ -72,6 +76,12 @@ module.exports.blogCreateOne = function (req, res) {
 };
    
 module.exports.blogUpdateOne = function (req, res) {
+  console.log('Received token:', req.headers.authorization);
+
+  if (!req.user) {
+    return res.status(401).json({ message: 'Unauthorized' });
+  }
+
   if (!req.params.blogid) {
     sendJSONresponse(res, 404, {"message": "Not found, blogid is required"});
     return;
@@ -100,6 +110,11 @@ module.exports.blogUpdateOne = function (req, res) {
 };
 
 module.exports.blogDeleteOne = function (req, res) {
+
+  if (!req.user) {
+    return res.status(401).json({ message: 'Unauthorized' });
+  }
+  
   var blogid = req.params.blogid;
   if (blogid) {
     Blogs

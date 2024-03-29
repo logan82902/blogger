@@ -32,6 +32,18 @@ app.config(function($routeProvider) {
         controller: 'DeleteController',
         controllerAs: 'vm'
       })
+
+      .when('/register', {
+        templateUrl: '/auth/register.view.html',
+        controller: 'RegisterController',
+        controllerAs: 'vm'
+      })
+  
+      .when('/signOn', {
+        templateUrl: '/auth/login.view.html',
+        controller: 'LoginController',
+        controllerAs: 'vm'
+      })
   
       .otherwise({redirectTo: '/'});
   });
@@ -45,26 +57,37 @@ app.config(function($routeProvider) {
     return $http.get('/api/blogs/' + id);
   }
   
-  function addBlog($http, data) {
-    return $http.post('/api/blogs/', data);
+  function addBlog($http, authentication, data) {
+    return $http.post('/api/blogs/', data, { headers: { Authorization: 'Bearer '+ authentication.getToken() }} );
         
 }
   
-  function updateBlogById($http, id, data) {
-    return $http.put('/api/blogs/' + id, data);
+  function updateBlogById($http, authentication, id, data) {
+    return $http.put('/api/blogs/' + id, data, { headers: { Authorization: 'Bearer '+ authentication.getToken() }} );
   }
   
-  function deleteBlogById($http, id) {
-    return $http.delete('/api/blogs/' + id);
+  function deleteBlogById($http, authentication, id) {
+    console.log("Token before delete request:", authentication.getToken());
+    console.log("Token before delete request:", authentication.getToken());
+
+    return $http.delete('/api/blogs/' + id, { headers: { Authorization: 'Bearer ' + authentication.getToken() } })
+        .then(function(response) {
+            console.log("Delete request successful:", response);
+            return response.data;
+        })
+        .catch(function(error) {
+            console.error("Error deleting blog:", error);
+            throw error;
+        });
   }
   
   //Controllers
   app.controller('HomeController', function HomeController() {
     var vm = this;
     vm.pageHeader = {
-        title: "Logan's Blog App"
+        title: "Welcome to MyBlog"
     };
-    vm.message = "Welcome. Click 'Add Blog' above to add a new blog, or click 'List Blogs' to view and manage all of your current blogs.";
+    vm.message = "Sign in above if you have not already to create and manage your blogs. Or, click 'List Blogs' to view all blogs.";
   });
   
   app.controller('ListController', function ListController($http) {
@@ -84,87 +107,40 @@ app.config(function($routeProvider) {
         });
   });
   
-  app.controller('AddController', ['$http', '$location', function AddController($http, $location) {
+  app.controller('AddController', [ '$http', '$location', 'authentication', function AddController($http, $location, authentication) {      var vm = this;
     var vm = this;
     vm.blog = {};
     vm.pageHeader = {
-        title: 'Blog Add'
+      title: 'Blog Add'
     };
     vm.message = "";
-
-    vm.submit = function () {
-        var data = {
-            title: vm.blog.title,
-            text: vm.blog.text
-        };
-
-        addBlog($http, data)
-            .then(function (addedBlog) {
-                vm.blog = {};
-
-                getAllBlogs($http)
-                    .then(function (response) {
-                        vm.blogs = response.data;
-                        vm.message = "";
-                        $location.path('blogList');
-                    })
-                    .catch(function (error) {
-                        console.error("Error fetching blogs:", error);
-                        vm.message = "Could not get blogs";
-                    });
-            })
-            .catch(function (error) {
-                console.error("Error adding blog:", error);
-                vm.message = "Could not add blog";
-            });
-    };
-}]);
-
-  
-  app.controller('EditController', [ '$http', '$routeParams', '$location', function EditController($http, $routeParams, $location) {
-    var vm = this;
-    vm.blog = {};
-    vm.id = $routeParams.id;
-    vm.pageHeader = {
-      title: 'Blog Edit'
-    };
-    vm.message = "Getting Blog";
-  
-    getBlogById($http, vm.id)
-      .then(function(data) {
-        vm.blog = data.data;
-        vm.message = "";
-      })
-      , (function (e) {
-        vm.message = "Could not retrieve blog at ID " + vm.id;
-      });
   
     vm.submit = function() {
       var data = vm.blog;
-      data.title = userForm.title.value;
-      data.text = userForm.text.value;
+      data.blogTitle = userForm.title.value;
+      data.blogText = userForm.entry.value;
   
-      updateBlogById($http, vm.id, data)
+      addBlog($http, authentication, data)
         .then(function(data) {
-          vm.message = "";
           $location.path('blogList');
         })
         , (function (e) {
-          vm.message = "Could not update blog at ID " + vm.id;
+          vm.message = "Could not add blog"
         });
     }
   }]);
   
-  app.controller('DeleteController', [ '$http', '$routeParams', '$location', function DeleteController($http, $routeParams, $location) {
-    var vm = this;
-    vm.blog = {};
-    vm.id = $routeParams.id;
-    vm.pageHeader = {
-      title: 'Blog Delete'
-    };
-    vm.message = "Getting Blog";
-  
-    getBlogById($http, vm.id)
+
+  app.controller('EditController', [ '$http', '$routeParams', '$location', 'authentication', function EditController($http, $routeParams, $location, authentication) {    var vm = this;
+  var vm = this;
+  vm.blog = {};
+  vm.id = $routeParams.id;
+  vm.pageHeader = {
+    title: 'Blog Edit'
+  };
+  vm.message = "Getting Blog";
+
+  getBlogById($http, vm.id)
     .then(function(data) {
       vm.blog = data.data;
       vm.message = "";
@@ -172,18 +148,52 @@ app.config(function($routeProvider) {
     , (function (e) {
       vm.message = "Could not retrieve blog at ID " + vm.id;
     });
+
+  vm.submit = function() {
+    var data = vm.blog;
+    data.title = userForm.title.value;
+    data.text = userForm.text.value;
+
+    updateBlogById($http, authentication, vm.id, data)
+      .then(function(data) {
+        vm.message = "";
+        $location.path('blogList');
+      })
+      , (function (e) {
+        vm.message = "Could not update blog at ID " + vm.id;
+      });
+  }
+}]);
   
-    vm.submit = function() {
-      deleteBlogById($http, vm.id)
-        .then(function(data) {
-          $location.path('blogList');
-        })
-        , (function (e) {
-          vm.message = "Could not delete blog"
-        });
-    }
-  
-    vm.cancel = function() {
-      $location.path('blogList');
-    }
-  }]);
+app.controller('DeleteController', [ '$http', '$routeParams', '$location', 'authentication', function DeleteController($http, $routeParams, $location, authentication) {
+  var vm = this;
+  vm.blog = {};
+  vm.id = $routeParams.id;
+  vm.pageHeader = {
+    title: 'Blog Delete'
+  };
+  vm.message = "Getting Blog";
+
+  getBlogById($http, vm.id)
+  .then(function(data) {
+    vm.blog = data.data;
+    vm.message = "";
+  })
+  , (function (e) {
+    vm.message = "Could not retrieve blog at ID " + vm.id;
+  });
+
+  vm.submit = function() {
+    deleteBlogById($http, authentication, vm.id)
+      .then(function(data) {
+        $location.path('blogList');
+      })
+      , (function (e) {
+        vm.message = "Could not delete blog"
+      });
+  }
+
+  vm.cancel = function() {
+    $location.path('blogList');
+  }
+}]);
