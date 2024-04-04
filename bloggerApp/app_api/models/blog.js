@@ -12,6 +12,12 @@ const blogSchema = new mongoose.Schema({
     createdOn: {
       type: Date,
       default: Date.now,
+    },
+    userEmail: {
+      type: String
+    },
+    userName: {
+      type: String
     }
 });
 

@@ -96,6 +96,7 @@ app.config(function($routeProvider) {
     getAllBlogs($http)
         .then(function (response) {
             vm.blogs = response.data;
+            console.log(response);
             vm.message = "";
         })
         .catch(function (error) {
@@ -116,7 +117,9 @@ app.config(function($routeProvider) {
       var data = vm.blog;
       data.title = userForm.title.value;
       data.text = userForm.text.value;
-  
+      data.userEmail = authentication.currentUser().email;
+      data.userName = authentication.currentUser().name;
+
       addBlog($http, authentication, data)
         .then(function(data) {
           $location.path('blogList');
