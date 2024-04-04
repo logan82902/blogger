@@ -60,7 +60,9 @@ module.exports.blogCreateOne = function (req, res) {
   Blogs
    .create({
       title: req.body.title,
-      text: req.body.text
+      text: req.body.text,
+      userEmail: req.body.userEmail,
+      userName: req.body.userName
      })
      .then(blog => {
        console.log(blog);
@@ -128,7 +130,9 @@ var createBlogList = function(req, res, results) {
       title: obj.title,
       text: obj.text,
       createdOn: obj.createdOn,
-      _id: obj._id
+      _id: obj._id,
+      userEmail: obj.userEmail,
+      userName: obj.userName
     });
   });
   return blogs;
