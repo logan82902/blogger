@@ -105,15 +105,14 @@ app.config(function($routeProvider) {
         });
 
       vm.isAuthorized = function(userEmail) {
-        // Check if user is authenticated
         if (authentication.isLoggedIn()) {
           var auth = authentication.currentUser().email;
-          // Check if the current user's email matches the email on the blog
+          
           if (auth === userEmail) {
             return true;
           }
         }
-        return false; // Return false if user is not authenticated or if emails don't match
+        return false; 
       }
   });
   
