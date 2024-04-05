@@ -82,9 +82,8 @@ app.config(function($routeProvider) {
   app.controller('HomeController', function HomeController() {
     var vm = this;
     vm.pageHeader = {
-        title: "Welcome to MyBlog"
+        title: "MyBlog"
     };
-    vm.message = "Sign in above if you have not already to create and manage your blogs. Or, click 'List Blogs' to view all blogs.";
   });
   
   app.controller('ListController', function ListController($http, authentication) {
@@ -128,8 +127,8 @@ app.config(function($routeProvider) {
       var data = vm.blog;
       data.title = userForm.title.value;
       data.text = userForm.text.value;
-      data.userEmail = authentication.currentUser().email;
-      data.userName = authentication.currentUser().name;
+      data.userEmail = authentication.currentUser().email.toLowerCase();
+      data.userName = capitalizeFirstLetterOfEachWord(authentication.currentUser().name);
 
       addBlog($http, authentication, data)
         .then(function(data) {
@@ -141,6 +140,12 @@ app.config(function($routeProvider) {
     }
   }]);
   
+  // Function to capitalize the first letter of each word
+  function capitalizeFirstLetterOfEachWord(name) {
+    return name.replace(/\b\w/g, function(match) {
+      return match.toUpperCase();
+    });
+  }
 
   app.controller('EditController', [ '$http', '$routeParams', '$location', 'authentication', function EditController($http, $routeParams, $location, authentication) {
     var vm = this;

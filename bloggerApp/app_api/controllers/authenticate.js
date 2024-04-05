@@ -7,6 +7,12 @@ var sendJSONresponse = function(res, status, content) {
   res.json(content);
 };
 
+var capitalizeFirstLetter = function(string) {
+  return string.replace(/\b\w/g, function(char) {
+    return char.toUpperCase();
+  });
+};
+
 module.exports.register = function(req, res) {
   if(!req.body.name || !req.body.email || !req.body.password) {
     sendJSONresponse(res, 400, {
@@ -17,8 +23,10 @@ module.exports.register = function(req, res) {
 
   var user = new User();
 
-  user.name = req.body.name;
-  user.email = req.body.email;
+  user.name = capitalizeFirstLetter(req.body.name); // Capitalize username
+  
+  // Convert email to lowercase before storing
+  user.email = req.body.email.toLowerCase();
 
   user.setPassword(req.body.password);
 
@@ -34,7 +42,6 @@ module.exports.register = function(req, res) {
     });
 };
 
-
 module.exports.login = function(req, res) {
   console.log("Login request received:", req.body.email); 
 
@@ -44,6 +51,9 @@ module.exports.login = function(req, res) {
     });
     return;
   }
+
+  // Convert email to lowercase
+  req.body.email = req.body.email.toLowerCase();
 
   passport.authenticate('local', function(err, user, info) {
     console.log("Passport authentication result:", err, user, info);
@@ -68,5 +78,4 @@ module.exports.login = function(req, res) {
       sendJSONresponse(res, 401, info);
     }
   })(req, res);
-
 };

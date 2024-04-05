@@ -10,15 +10,53 @@
   <script src="/js/bloggerApp.js"></script>
   <script src="/auth/authentication.js"></script>
   <script src="/nav/navigation.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+  </style>
 </head>
-
 <body>
+
+  <!-- Background Animation - Derived from Ksenia Kondrashova on https://devdevout.com/css/css-animated-backgrounds (modified the authors animation and colors)-->
+  <svg preserveAspectRatio="xMidYMid slice" viewBox="10 10 80 80">
+    <defs>
+        <style>
+            @keyframes rotate {
+                0% {
+                    transform: rotate(0deg);
+                }
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+            .out-top {
+                animation: rotate 160s linear infinite; /* Slower animation */
+                transform-origin: 13px 25px;
+            }
+            .in-top {
+                animation: rotate 80s linear infinite; /* Slower animation */
+                transform-origin: 13px 25px;
+            }
+            .out-bottom {
+                animation: rotate 200s linear infinite; /* Slower animation */
+                transform-origin: 84px 93px;
+            }
+            .in-bottom {
+                animation: rotate 120s linear infinite; /* Slower animation */
+                transform-origin: 84px 93px;
+            }
+        </style>
+    </defs>
+    <path fill="rgba(13, 110, 253, 0.5)" class="out-top" d="M37-5C25.1-14.7,5.7-19.1-9.2-10-28.5,1.8-32.7,31.1-19.8,49c15.5,21.5,52.6,22,67.2,2.3C59.4,35,53.7,8.5,37-5Z"/>
+    <path fill="rgba(0, 0, 0, 0.5)" class="in-top" d="M20.6,4.1C11.6,1.5-1.9,2.5-8,11.2-16.3,23.1-8.2,45.6,7.4,50S42.1,38.9,41,24.5C40.2,14.1,29.4,6.6,20.6,4.1Z"/>
+    <path fill="rgba(13, 110, 253, 0.5)" class="out-bottom" d="M105.9,48.6c-12.4-8.2-29.3-4.8-39.4.8-23.4,12.8-37.7,51.9-19.1,74.1s63.9,15.3,76-5.6c7.6-13.3,1.8-31.1-2.3-43.8C117.6,63.3,114.7,54.3,105.9,48.6Z"/>
+    <path fill="rgba(0, 0, 0, 0.5)" class="in-bottom" d="M102,67.1c-9.6-6.1-22-3.1-29.5,2-15.4,10.7-19.6,37.5-7.6,47.8s35.9,3.9,44.5-12.5C115.5,92.6,113.9,74.6,102,67.1Z"/>
+  </svg>
+  
 <!-- Angular Templates -->
+
+<!-- Text animation developed by carpe numidium on https://www.sliderrevolution.com/resources/css-text-animation/-->
   <script type="text/ng-template" id="pages/home.html">
-    <p></p>
-    <h2>{{vm.pageHeader.title}}</h2>
-    <p></p><p></p>
-    <h5>{{vm.message}}</h5>
+    <h1 class="righteous-regular" id="h1b" data-shadow={{vm.pageHeader.title}}>{{vm.pageHeader.title}}</h1>
   </script>
 
   <script type="text/ng-template" id="pages/blogList.html">
@@ -35,7 +73,7 @@
             <div class="card-body">
                 <h5 class="card-title" style="font-size: 20px; font-weight: bold;">{{blog.title}}</h5>
                 <p>{{blog.text}}</p>
-                <p class="card-text" style="color: grey"><i><small>Published by {{blog.userName}} on {{blog.createdOn | date:'medium'}}</small></i></p>
+                <p class="card-text" style="color: grey"><i><small>Published by {{blog.userName}}<br>{{blog.createdOn | date:'MMM d, y h:mm a'}}</small></i></p>
             </div>
             <div class="card-footer">
                 <div class="col-sm">
@@ -55,7 +93,7 @@
   </script>
 
   <script type="text/ng-template" id="pages/blogAdd.html">
-    <p></p>
+    <div class="login-container">
     <div class="card border-primary" style="width: 50%"> 
       <form name="userForm" ng-submit="vm.submit()" ng-controller="AddController" style="padding: 20px">
         <div class="form-group">
@@ -71,16 +109,19 @@
         <input type="submit" class="btn btn-primary" value="Add Blog">
       </form>
     </div>
+  </div>
   </script>
 
 
   <script type="text/ng-template" id="pages/blogEdit.html">
+    <div class="login-container">
     <p>{{vm.message}}</p>
       <div class="card border-primary" style="width: 50%">  
         <form name="userForm" ng-submit="vm.submit()" ng-controller="EditController" style="padding: 20px">
           <div class="form-group">
             <label for="summary" class="text-primary">Title</label>
             <input class="form-control" id="title" name="title" value="{{vm.blog.title}}">
+            <p></p>
             <label for="detail" class="text-primary">Blog Text</label>
             <textarea class="form-control" id="text" name="text" rows="3">{{vm.blog.text}}</textarea>
             <p></p>
@@ -88,22 +129,27 @@
           <input type="submit" class="btn btn-primary" value="Update">
         </form>
       </div>
+    </div>
   </script>
 
   <script type="text/ng-template" id="pages/blogDelete.html">
+    <div class="login-container">
     <p></p>
       <div class="card border-primary" style="width: 50%">
         <form name="userForm" ng-submit="vm.submit()" ng-controller="DeleteController" style="padding: 20px">
           <div class="form-group">
               <label for="summary" class="text-primary">Title</label>
               <input readonly class="form-control" id="title" name="title" value="{{vm.blog.title}}">
+              <p></p>
               <label for="detail" class="text-primary">Blog Text</label>
               <textarea readonly class="form-control" id="text" name="text" rows="3">{{vm.blog.text}}</textarea>
+              <p></p>
           </div>
              <input type="submit" class="btn btn-danger float-right" style="margin-right: 10px; margin-top: 15px" value="Delete">
              <button ng-click="vm.cancel()" ng-controller="DeleteController" class="btn btn-primary float-right" style="margin-top: 15px">Cancel</button>
         </form>
       </div>
+    </div>
   </script>
 
   <div ng-controller="NavigationController">
