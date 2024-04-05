@@ -1,5 +1,166 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #000 !important; /* Solid black background */
+  overflow-x: hidden; /* Hide horizontal overflow */
 }
+
+textarea {
+  height: 25vh;
+}
+
+.form-control {
+  background-color: #222 !important;
+  color: white !important;
+}
+
+/* Background Animation */
+@keyframes backgroundAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Apply animation to body */
+body {
+  animation: backgroundAnimation 30s ease infinite alternate;
+}
+
+/* Dark-themed cards */
+.card {
+  background-color: #222 !important;
+  color: #fff !important;
+  margin: 0 auto; 
+  margin-top: 20px; 
+  width: 50%; 
+}
+
+/* Navbar styles */
+.navbar {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.5)) !important;
+  position: relative; 
+  z-index: 1; 
+  opacity: 0.7; 
+}
+
+/* Navbar brand styles */
+.navbar-brand {
+  color: white; /* Default color */
+  transition: transform 0.3s ease; /* Add transition for smooth scaling */
+  text-decoration: none !important; 
+}
+
+.navbar-brand:hover {
+  color: rgb(13, 110, 253); /* Change color on hover */
+  transform: scale(1.1); /* Scale up on hover */
+}
+
+.navbar-nav .nav-link {
+  color: rgb(13, 110, 253) !important; /* Set default link color */
+  transition: color 0.3s ease; /* Smooth transition for color change */
+  text-decoration: none; 
+}
+
+.navbar-nav .nav-link:hover {
+  color: rgb(255, 255, 255) !important; 
+  transform: translateY(-2px); 
+}
+
+/* Background SVG animation*/
+svg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -1; 
+}
+
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.links {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 18px;
+  font-family: sans-serif;
+}
+a {
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  margin-left: 1em;
+}
+
+a img.icon {
+  display: inline-block;
+  height: 1em;
+  margin: 0 0 -0.1em 0.3em;
+}
+
+.righteous-regular {
+  font-family: "Righteous", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 500px;
+}
+
+*, *:before, *:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+}
+
+
+#h1b {
+  display: inline-block;
+  color: white;
+  font-family: "Righteous", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 12em; 
+  text-shadow: .03em .03em 0 #0d6efd;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-left: auto;
+  margin-top: auto;
+}
+
+#h1b:after {
+  content: attr(data-shadow);
+  position: absolute;
+  top: .06em; 
+  left: .06em;
+  z-index: -1;
+  text-shadow: none;
+  background-image:
+    linear-gradient(
+      45deg,
+      transparent 45%,
+      hsla(48,20%,90%,1) 45%,
+      hsla(48,20%,90%,1) 55%,
+      transparent 0
+    );
+  background-size: .05em .05em;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+  animation: shad-anim 120s linear infinite; /* Even slower animation */
+}
+
+@keyframes shad-anim {
+  0% { background-position: 0 0; }
+  100% { background-position: 100% -100%; }
+}
+
+
+
+
 
