@@ -87,7 +87,7 @@ app.config(function($routeProvider) {
     vm.message = "Sign in above if you have not already to create and manage your blogs. Or, click 'List Blogs' to view all blogs.";
   });
   
-  app.controller('ListController', function ListController($http) {
+  app.controller('ListController', function ListController($http, authentication) {
     var vm = this;
     vm.pageHeader = {
         title: "Blog List"
@@ -103,6 +103,18 @@ app.config(function($routeProvider) {
             console.error("Error fetching blogs:", error);
             vm.message = "No blogs found. Click 'Add Blog' above to create one.";
         });
+
+      vm.isAuthorized = function(userEmail) {
+        // Check if user is authenticated
+        if (authentication.isLoggedIn()) {
+          var auth = authentication.currentUser().email;
+          // Check if the current user's email matches the email on the blog
+          if (auth === userEmail) {
+            return true;
+          }
+        }
+        return false; // Return false if user is not authenticated or if emails don't match
+      }
   });
   
   app.controller('AddController', [ '$http', '$location', 'authentication', function AddController($http, $location, authentication) {      
@@ -196,4 +208,5 @@ app.config(function($routeProvider) {
     vm.cancel = function() {
       $location.path('blogList');
     }
+    
   }]);
