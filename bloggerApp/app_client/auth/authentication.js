@@ -104,7 +104,6 @@ app.controller('LoginController', ['$location', 'authentication', function Login
         , (function(err){
           var obj = err;
           console.log(obj.message);
-          //vm.formError = obj.message;
           vm.formError = "Login failed. Email or password maybe incorrect.";
         }));
     };
