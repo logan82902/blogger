@@ -8,7 +8,6 @@ Welcome to the MyBlog Website! This website allows users to read, create, edit, 
 - [Technologies Used](#technologies-used)
 - [Usage](#usage)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 
