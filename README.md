@@ -1,4 +1,4 @@
-# Blog Website
+# MyBlog Website
 
 Welcome to the MyBlog Website! This website allows users to read, create, edit, and delete blog posts.
 
