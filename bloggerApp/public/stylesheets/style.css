@@ -36,34 +36,48 @@ body {
 }
 
 /* Navbar styles */
+
+/* Importing the "Inter" font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
 .navbar {
   background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.5)) !important;
-  position: relative; 
-  z-index: 1; 
-  opacity: 0.7; 
+  position: relative;
+  z-index: 1;
+  opacity: 0.7;
 }
 
 /* Navbar brand styles */
 .navbar-brand {
-  color: white; /* Default color */
+  color: white;
+  font-family: 'Inter', sans-serif; /* Unique and interesting font */
   transition: transform 0.3s ease; /* Add transition for smooth scaling */
-  text-decoration: none !important; 
+  text-decoration: none !important;
 }
 
 .navbar-brand:hover {
   color: rgb(13, 110, 253); /* Change color on hover */
-  transform: scale(1.1); /* Scale up on hover */
+  transform: scale(1.05); /* Scale up on hover */
 }
 
+/* Navbar links styles */
 .navbar-nav .nav-link {
-  color: rgb(13, 110, 253) !important; /* Set default link color */
-  transition: color 0.3s ease; /* Smooth transition for color change */
-  text-decoration: none; 
+  color: rgb(13, 110, 253) !important;
+  font-family: 'Inter', sans-serif; /* Unique and interesting font */
+  transition: transform 0.3s ease, opacity 0.3s ease; /* Smooth transition for transform and opacity */
+  text-decoration: none;
 }
 
 .navbar-nav .nav-link:hover {
-  color: rgb(255, 255, 255) !important; 
-  transform: translateY(-2px); 
+  color: rgb(255, 255, 255) !important;
+  transform: scale(1.05); /* Scale up on hover */
+  opacity: 0.8; /* Reduce opacity on hover */
+}
+
+/* Active link style */
+.navbar-nav .nav-link.active {
+  color: rgb(255, 255, 255) !important;
+  font-weight: bold; /* Highlight active link with bold font weight */
 }
 
 /* Background SVG animation*/
