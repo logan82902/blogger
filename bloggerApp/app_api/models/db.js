@@ -1,6 +1,7 @@
 var mongoose = require( 'mongoose' );
 require('./blog');
 require('./users');
+require('./chat');
 
 var gracefulShutdown;
 var dbURI = 'mongodb://blogs:blog123@localhost:27017/blogs';

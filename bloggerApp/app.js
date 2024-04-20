@@ -5,13 +5,12 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var passport = require('passport');
 
+var app = express();
+
 require('./app_api/models/db');
 require('./app_api/config/passport');
 
-
 var routesApi = require('./app_api/routes/index');
-
-var app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
