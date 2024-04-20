@@ -185,7 +185,6 @@ a img.icon {
   max-width: 100%;
   word-wrap: break-word; 
   overflow-wrap: break-word; 
-  pointer-events: none !important;
 }
 
 .register-link {
@@ -195,7 +194,6 @@ a img.icon {
 .btn-trash {
   background-color: rgb(19, 50, 223) !important; 
   border-color: rgb(19, 50, 223) !important; 
-  pointer-events: all !important;
 }
 
 .btn-trash:hover {
