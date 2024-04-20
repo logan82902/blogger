@@ -44,6 +44,12 @@ app.config(function($routeProvider) {
         controller: 'LoginController',
         controllerAs: 'vm'
       })
+
+      .when('/blogChat', {
+        templateUrl: 'pages/blogChat.html',
+        controller: 'ChatController',
+        controllerAs: 'vm'
+      })
   
       .otherwise({redirectTo: '/'});
   });
@@ -76,6 +82,14 @@ app.config(function($routeProvider) {
             console.error("Error deleting blog:", error);
             throw error;
         });
+  }
+
+  function getChat($http) {
+    return $http.get('/api/chat');
+  }
+
+  function updateChat($http, authentication, data) {
+    return $http.post('/api/chat', data, { headers: { Authorization: 'Bearer '+ authentication.getToken() }} );
   }
   
   //Controllers
@@ -214,3 +228,90 @@ app.config(function($routeProvider) {
     }
     
   }]);
+
+    // ChatController
+  app.controller('ChatController', ['$http', '$scope', '$interval', 'authentication', function ChatController($http, $scope, $interval, authentication) {
+    var vm = this;
+    
+    vm.newMessage = ''; // Initialize newMessage to store the message being typed
+
+    vm.isAuthorized = function(messageEmail) {
+      var currentUser = authentication.currentUser();
+      return currentUser && currentUser.email === messageEmail;
+    };
+
+    vm.pageHeader = {
+      title: 'Chat'
+    };
+
+    vm.chat = []; 
+    vm.isDeleting = false; 
+
+    // Function to retrieve chat messages from the server
+    function getChat() {
+      $http.get('/api/chat')
+        .then(function(response) {
+          vm.chat = response.data; // Assign chat messages to vm.chat
+        })
+        .catch(function(error) {
+          console.error("Error retrieving chat messages:", error);
+        });
+    }
+
+    getChat();
+
+    vm.handleKeyDown = function(event) {
+      if (event.keyCode === 13) { // Check if the Enter key is pressed
+        event.preventDefault(); // Prevent default form submission
+        vm.submit(); // Call the submit method to send the message
+      }
+    };
+    
+  vm.submitInProgress = false;
+
+vm.submit = function() {
+  if (vm.submitInProgress) {
+    return;
+  }
+
+  // Only post the message if it's not empty
+  if (vm.newMessage.trim() !== '') {
+    vm.submitInProgress = true; 
+
+    var data = {
+      chat: vm.newMessage,
+      name: authentication.currentUser().name,
+      email: authentication.currentUser().email
+    };
+
+    $http.post('/api/chat', data)
+      .then(function(response) {
+        getChat();
+        vm.newMessage = ''; 
+        vm.submitInProgress = false;
+      })
+  }
+  document.getElementById('postField').focus();
+};
+    
+vm.deleteMessage = function(messageId) {
+  // Remove the message from the array immediately
+  vm.chat = vm.chat.filter(function(message) {
+      return message._id !== messageId;
+  });
+
+  // Then send the delete request to the server
+  $http.delete('/api/chat/' + messageId)
+      .then(function(response) {
+        document.getElementById('postField').focus();
+      })
+      .catch(function(error) {
+          console.error("Error deleting chat message:", error);
+          getChat(); 
+      });
+};
+
+  $interval(function() {
+    getChat();
+  }, 500);
+}]);

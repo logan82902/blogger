@@ -11,7 +11,7 @@ const blogSchema = new mongoose.Schema({
     },
     createdOn: {
       type: Date,
-      default: Date.now,
+      default: Date.now
     },
     userEmail: {
       type: String

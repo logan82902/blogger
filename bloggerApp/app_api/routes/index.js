@@ -1,8 +1,10 @@
 var express = require('express');
 var router = express.Router();
 require('dotenv').config();
-var ctrlBlog = require('../controllers/blog');
+const ctrlBlog = require('../controllers/blog');
 const ctrlAuth = require('../controllers/authenticate');
+const ctrlChat = require('../controllers/chat');
+
 var jwt = require('express-jwt');
 
 var auth = jwt({
@@ -20,5 +22,10 @@ router.delete('/blogs/:blogid', auth, ctrlBlog.blogDeleteOne);
 // Authorization
 router.post('/register', ctrlAuth.register);
 router.post('/login', ctrlAuth.login);
+
+// Chat
+router.get('/chat', ctrlChat.chatGet);
+router.post('/chat', ctrlChat.chatPost);
+router.delete('/chat/:chatId', ctrlChat.chatDelete);
 
 module.exports = router;
