@@ -56,11 +56,6 @@
 
 <!-- Text animation developed by carpe numidium on https://www.sliderrevolution.com/resources/css-text-animation/-->
   <script type="text/ng-template" id="pages/home.html">
-     <!-- Chat icon -->
-     <div class="click-here" >
-      <a href="#!/blogChat" title="Click here if you want to talk to fellow bloggers!" style="color: white; text-decoration: none;">
-          <i class="fas fa-comment-alt"></i> OpenChat
-      </a>
     <h1 class="righteous-regular" id="h1b" data-shadow={{vm.pageHeader.title}}>{{vm.pageHeader.title}}</h1>
   </script>
 
@@ -159,33 +154,36 @@
 
   <script type="text/ng-template" id="pages/blogChat.html">
     <div class="login-container">
-    <p>{{vm.message}}</p>
+    
     <div class="container">
       <div class="card border-primary chat-container">
         <form name="userForm" ng-controller="ChatController" style="padding: 20px;">
           <div class="form-group">
             <label for="detail" class="text-primary">Live Chat</label>
+            <p class="tempMessage">{{vm.message}}</p>
             <!-- Chat message box -->
-            <div class="content-box" style="padding: 10px; overflow-y: auto; height: 500px;">
+            <div class="content-box" lang="en">
+              
               <!-- Display chat messages -->
               <div ng-repeat="message in vm.chat" class="chat-message">
                 <div class="message-content">
-                  <p><b class="blueBold">{{ message.name }}</b>: {{ message.chat }}</p>
+                  <p style="margin-right:20px;"><b class="blueBold">{{ message.name }}</b> : {{ message.chat }}</p>
                 </div>
+              
                 <!-- Trash icon -->
                 <button class="btn btn-danger btn-trash" ng-click="vm.deleteMessage(message._id)" ng-show="vm.isAuthorized(message.email)">
                   <i class="fas fa-trash-alt"></i>
                 </button>
               </div>
             </div>
+            <p></p>
             <!-- Input field for new message -->
             <input class="form-control" id="postField" name="postField" ng-model="vm.newMessage" ng-keydown="vm.handleKeyDown($event)" placeholder="Type your message here..." autocomplete="off">
+            <p></p>
           </div>
           <!-- Submit button -->
           <button class="btn btn-primary btn-purple" ng-click="vm.submit(); $event.preventDefault();">Send</button>
-
         </form>
-        
       </div>
     </div>
   </div>

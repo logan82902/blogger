@@ -5,13 +5,11 @@ app.service('authentication', authentication);
     function authentication ($window, $http) {
 
         var saveToken = function (token) {
-          console.log("Saving token to local storage:", token);
             $window.localStorage['blog-token'] = token;
         };
 
         var getToken = function () {
           var token = $window.localStorage['blog-token'];
-          console.log("Retrieving token from local storage:", token);
           return token;
       };
 
