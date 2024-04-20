@@ -61,7 +61,7 @@
 
   <script type="text/ng-template" id="pages/blogList.html">
     <br>
-    <p>{{vm.message}}</p>
+    <p style="color: white;">{{vm.message}}</p>
     <div ng-repeat="blog in vm.blogs">
       
         <div class="card border-primary" style="width: 50%"> 
@@ -163,7 +163,6 @@
             <p class="tempMessage">{{vm.message}}</p>
             <!-- Chat message box -->
             <div class="content-box" lang="en">
-              
               <!-- Display chat messages -->
               <div ng-repeat="message in vm.chat" class="chat-message">
                 <div class="message-content">

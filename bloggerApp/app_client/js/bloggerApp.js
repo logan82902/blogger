@@ -229,7 +229,6 @@ app.config(function($routeProvider) {
     
   }]);
 
-    // ChatController
   app.controller('ChatController', ['$http', '$scope', '$interval', 'authentication', function ChatController($http, $scope, $interval, authentication) {
     var vm = this;
     
